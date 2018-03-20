@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Hot Restaurant</h1>
+            <p>Make your reservation</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">view tables</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">home</a>
+            </p>
+        </div>
+        <div class="container">
+            <h4>Name</h4>
+            <input type="text" id="name" class="form-control" required>
+            <h4>Phone Number</h4>
+            <input type="text" id="phone" class="form-control" required>
+            <h4>Email</h4>
+            <input type="text" id="email" class="form-control" required>
+            <h4>Unique ID</h4>
+            <input type="text" id="unique" class="form-control" required>
+            <hr>
+
+
+
+
+
+
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                Submit</button>
+            <br>
+            <br>
+            <br>
+
+        </div>
+
+
+
+    </div>
+<script>
+
+    $("#submit").on("click", function(event){
+        event.preventDefault();
+        var newReservation = {
+            name: $("#name").val().trim(),
+            phone: $("#phone").val().trim(),
+            email: $("#email").val().trim(),
+            unique: $("#unique").val().trim()
+        }
+      $.post("/api/newReservation", newReservation).then(function(data){
+          console.log(data)
+      })  
+
+
+
+    })
+
+
+
+</script>
+
+</body>
+
+</html>
