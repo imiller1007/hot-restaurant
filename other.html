@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Hot Restaurant</h1>
+            <p>Current reservations and waiting list</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">make reservation</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">home</a>
+            </p>
+        </div>
+        <div class="container">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading current">Current reservations</div>
+                <div class="panel-body">
+                    <p>need the number and the name of the person</p>
+                </div>
+                <div class="panel-body">
+                    <p>need the number and the name of the person</p>
+                </div>
+                <div class="panel-body">
+                    <p>need the number and the name of the person</p>
+                </div>
+
+            </div>
+            <div class="panel panel-default wait">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Wait list </div>
+                    
+    
+                </div>
+
+
+
+
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                Submit</button>
+            <br>
+            <br>
+            <br>
+
+        </div>
+
+
+
+    </div>
+<script>
+
+
+    $.get("/api/customers", function(data){
+        for (let i = 0; i <5; i++){
+            $(".current").append(`
+            <div class="panel-body">
+                <p>${data[i]+1} | ${data.customerName} </p>
+    `)
+        }
+        for (let i =5; i< data.length; i++){
+            $(".wait").append(`
+            <div class="panel-body">
+                <p>${data[i]+1} | ${data.customerName} </p>
+    `)
+        }
+        
+    })
+
+</script>
+
+</body>
+
+</html>
