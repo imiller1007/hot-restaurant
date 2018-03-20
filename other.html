@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <!-- <script src="main.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -25,15 +26,7 @@
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading current">Current reservations</div>
-                <div class="panel-body">
-                    <p>need the number and the name of the person</p>
-                </div>
-                <div class="panel-body">
-                    <p>need the number and the name of the person</p>
-                </div>
-                <div class="panel-body">
-                    <p>need the number and the name of the person</p>
-                </div>
+                
 
             </div>
             <div class="panel panel-default wait">
@@ -69,16 +62,17 @@
 
 
     $.get("/api/customers", function(data){
+        console.log(data)
         for (let i = 0; i <5; i++){
             $(".current").append(`
             <div class="panel-body">
-                <p>${data[i]+1} | ${data.customerName} </p>
+                <p>${i+1} | ${data[i].name} </p>
     `)
         }
         for (let i =5; i< data.length; i++){
             $(".wait").append(`
             <div class="panel-body">
-                <p>${data[i]+1} | ${data.customerName} </p>
+                <p>${i+1} | ${data[i].name} </p>
     `)
         }
         

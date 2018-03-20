@@ -42,7 +42,7 @@ app.get("/tables", function(req, res) {
 
 //------------------------------------------------------------------
 
-app.post("/app/newReservation", function(req, res) {
+app.post("/api/newReservation", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body-parser middleware
     var newCustomer = req.body;
