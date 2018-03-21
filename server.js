@@ -49,17 +49,23 @@ app.post("/api/newReservation", function(req, res) {
     // Using a RegEx Pattern to remove spaces from newCharacter
     // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
     newCustomer.routeName = newCustomer.name.replace(/\s+/g, "");
-  
-    console.log(newCustomer);
 
-  
     customers.push(newCustomer);
+
+});
+
+app.post("/api/remove", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body-parser middleware
   
+  var customer = req.body.number - 1;
+  customers.splice(customer, 1)
+  res.json(customers)
   
 });
 
 app.get("/api/customers", function(req, res) {
-    console.log(customers)
+    console.log("this is the customers list: " + customers)
   
     return res.json(customers);
   });
