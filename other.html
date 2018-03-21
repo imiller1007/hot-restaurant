@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 </head>
 
@@ -26,21 +26,13 @@
             <div class="panel panel-default current">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Current reservations</div>
-                
-
             </div>
             <div class="panel panel-default wait">
-                    <!-- Default panel contents -->
-                    <div class="panel-heading">Wait list </div>
-                    
-    
-                </div>
+                <!-- Default panel contents -->
+                <div class="panel-heading">Wait list </div>
 
 
-
-
-
-
+            </div>
             <br>
             <br>
             <br>
@@ -58,27 +50,43 @@
 
 
     </div>
-<script>
+    <script>
 
-
-    $.get("/api/customers", function(data){
-        console.log(data)
-        for (let i = 0; i <5; i++){
-            $(".current").append(`
+        function getNames() {
+            $.get("/api/customers", function (data) {
+                console.log(data)
+                for (let i = 0; i < 5; i++) {
+                    $(".current").append(`
             <div class="panel-body">
-                <p>${i+1} | ${data[i].name} </p>
-    `)
-        }
-        for (let i =5; i< data.length; i++){
-            $(".wait").append(`
+                <p>${i + 1} | ${data[i].name} <button type="button" id="remove" class="btn btn-danger">Remove</button></p>
+            `)
+                }
+                for (let i = 5; i < data.length; i++) {
+                    $(".wait").append(`
             <div class="panel-body">
-                <p>${i+1} | ${data[i].name} </p>
-    `)
-        }
-        
-    })
+                <p>${i + 1} | ${data[i].name} </p>
+            `)
+                }
 
-</script>
+            })
+        }
+
+        getNames();
+
+        $(document).on("click", "#remove", function () {
+            var number = $(this).parent().text().split("|")[0]
+            $(this).parent().remove();
+            $(".panel-body").remove();
+            var object = {
+                number: number
+            }
+            $.post("/api/remove", object).then(function (data) {
+                console.log(data)
+                getNames();
+            })
+        })
+
+    </script>
 
 </body>
 
